@@ -1,8 +1,15 @@
 import Vue from 'vue'
+import MpvueRouterPatch from 'mpvue-router-patch'
 import App from './App'
+import store from './store'
 
-Vue.config.productionTip = false
-App.mpType = 'app'
+Vue.use(MpvueRouterPatch);
 
-const app = new Vue(App)
-app.$mount()
+Vue.config.productionTip = false;
+
+const app = new Vue({
+    mpType: 'app',
+    store,
+    ...App
+});
+app.$mount();
