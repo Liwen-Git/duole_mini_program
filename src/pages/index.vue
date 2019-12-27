@@ -22,6 +22,7 @@
             <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy"/>
         </form>
 
+        <van-button type="primary">go to Vuex</van-button>
         <a href="/pages/counter" class="counter">去往Vuex示例页面</a>
 
         <div class="all">
@@ -58,7 +59,7 @@
             },
             getUserInfo () {
                 // 调用登录接口
-                wx.login({
+                mpvue.login({
                     success: () => {
                         wx.getUserInfo({
                             success: (res) => {

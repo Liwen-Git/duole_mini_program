@@ -1,7 +1,13 @@
 {
     "pages": [
         "pages/index",
-        "pages/logs",
+        {
+            "path": "pages/logs",
+            "config": {
+                "navigationBarTitleText": "日志",
+                "enablePullDownRefresh": true
+            }
+        },
         "pages/counter"
     ],
     "window": {
@@ -27,18 +33,9 @@
             "iconPath": "static/tabs/orders.png",
             "selectedIconPath": "static/tabs/orders-active.png"
         }],
-
-        "items": [{
-            "name": "首页",
-            "pagePath": "pages/index",
-            "icon": "static/tabs/home.png",
-            "activeIcon": "static/tabs/home-active.png"
-        }, {
-            "name": "订单",
-            "pagePath": "pages/logs",
-            "icon": "static/tabs/orders.png",
-            "activeIcon": "static/tabs/orders-active.png"
-        }],
         "position": "bottom"
+    },
+    "usingComponents": {
+        "van-button": "vant-weapp/dist/button/index"
     }
 }
