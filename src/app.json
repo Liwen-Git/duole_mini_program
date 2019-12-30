@@ -1,6 +1,11 @@
 {
     "pages": [
-        "pages/index",
+        {
+            "path": "pages/index",
+            "config": {
+                "navigationBarTitleText": "导航"
+            }
+        },
         {
             "path": "pages/logs",
             "config": {
@@ -16,26 +21,14 @@
         "navigationBarTitleText": "WeChat",
         "navigationBarTextStyle": "black"
     },
-    "tabBar": {
-        "color": "#999",
-        "backgroundColor": "#fafafa",
-        "selectedColor": "#333",
-        "borderStyle": "white",
-
-        "list": [{
-            "text": "首页",
-            "pagePath": "pages/index",
-            "iconPath": "static/tabs/home.png",
-            "selectedIconPath": "static/tabs/home-active.png"
-        }, {
-            "text": "订单",
-            "pagePath": "pages/logs",
-            "iconPath": "static/tabs/orders.png",
-            "selectedIconPath": "static/tabs/orders-active.png"
-        }],
-        "position": "bottom"
-    },
     "usingComponents": {
-        "van-button": "vant-weapp/dist/button/index"
+        "van-row": "vant-weapp/dist/row/index",
+        "van-col": "vant-weapp/dist/col/index",
+        "van-button": "vant-weapp/dist/button/index",
+        "van-grid": "vant-weapp/dist/grid/index",
+        "van-grid-item": "vant-weapp/dist/grid-item/index",
+        "van-panel": "vant-weapp/dist/panel/index",
+        "van-cell": "vant-weapp/dist/cell/index",
+        "van-cell-group": "vant-weapp/dist/cell-group/index"
     }
 }

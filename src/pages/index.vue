@@ -1,138 +1,66 @@
 <template>
-    <div @click="clickHandle">
+    <div>
+        <van-panel title="互动空间" header-class="index-van-panel-header-class">
+            <van-grid clickable column-num="2">
+                <van-grid-item icon="like-o" link-type="navigateTo" url="/pages/counter" text="FeVer物语" />
+                <van-grid-item icon="star-o" link-type="navigateTo" url="" text="李子语录" />
+            </van-grid>
+        </van-panel>
 
-        <div class="userinfo" @click="bindViewTap">
-            <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover"/>
-            <img class="userinfo-avatar" src="/static/images/user.png" background-size="cover"/>
-
-            <div class="userinfo-nickname">
-                <card :text="userInfo.nickName"></card>
-            </div>
-        </div>
-
-        <div class="usermotto">
-            <div class="user-motto">
-                <card :text="motto"></card>
-            </div>
-        </div>
-
-        <form class="form-container">
-            <input type="text" class="form-control" :value="motto" placeholder="v-model"/>
-            <input type="text" class="form-control" v-model="motto" placeholder="v-model"/>
-            <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy"/>
-        </form>
-
-        <van-button type="primary">go to Vuex</van-button>
-        <a href="/pages/counter" class="counter">去往Vuex示例页面</a>
-
-        <div class="all">
-            <div class="left">
-            </div>
-            <div class="right">
-            </div>
-        </div>
+        <van-button type="primary" v-if="false" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">
+            授权登录
+        </van-button>
     </div>
 </template>
 
 <script>
-    import card from '@/components/card'
-
     export default {
         data() {
             return {
-                motto: 'Hello miniprograme',
                 userInfo: {
                     nickName: 'mpvue',
                     avatarUrl: ''
                 }
             }
         },
-
-        components: {
-            card
-        },
-
         methods: {
-            bindViewTap() {
-                const url = '/pages/logs';
-                this.$router.push(url);
-            },
             getUserInfo () {
                 // 调用登录接口
                 mpvue.login({
-                    success: () => {
-                        wx.getUserInfo({
+                    success: (res) => {
+                        console.log('login', res);
+                        mpvue.getUserInfo({
                             success: (res) => {
+                                console.log('user', res);
                                 this.userInfo = res.userInfo
                             }
                         })
                     }
                 })
             },
-            clickHandle(ev) {
-                console.log('clickHandle:', ev)
-                // throw {message: 'custom test'}
+            bindGetUserInfo(e) {
+                console.log('e', e);
+            },
+            test() {
+                this.$fly.request({
+                    method: "get",
+                    url: '/api/mini/story/check'
+                }).then(res => {
+                    console.log(res);
+                })
             }
         },
-
         created() {
-            // let app = getApp()
+            this.test();
         }
     }
 </script>
 
-<style scoped>
-    .userinfo {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+<style>
+    .index-van-panel-header-class:after {
+        border-bottom: none !important;
     }
-
-    .userinfo-avatar {
-        width: 128 rpx;
-        height: 128 rpx;
-        margin: 20 rpx;
-        border-radius: 50%;
-    }
-
-    .userinfo-nickname {
-        color: #aaa;
-    }
-
-    .usermotto {
-        margin-top: 150px;
-    }
-
-    .form-control {
-        display: block;
-        padding: 0 12px;
-        margin-bottom: 5px;
-        border: 1px solid #ccc;
-    }
-
-    .all {
-        width: 7.5rem;
-        height: 1rem;
-        background-color: blue;
-    }
-
-    .all:after {
-        display: block;
-        content: '';
-        clear: both;
-    }
-
-    .left {
-        float: left;
-        width: 3rem;
-        height: 1rem;
-        background-color: red;
-    }
-
-    .right {
-        float: left;
-        width: 4.5rem;
-        height: 1rem;
-        background-color: green;
+    .index-van-panel-header-class .van-cell__title {
+        color: rgba(69, 90, 100, 0.6) !important;
     }
 </style>
