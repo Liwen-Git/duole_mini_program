@@ -23,13 +23,27 @@ fly.interceptors.request.use((request) => {
 // 添加响应拦截器
 fly.interceptors.response.use((response) => {
     mpvue.hideLoading();
-    return response.data;
+    let data = response.data;
+    if (data.code === 0) {
+        return data.data;
+    } else {
+        mpvue.showToast({
+            title: data.message,
+            icon: 'none',
+            duration: 2000
+        });
+        return false;
+    }
 }, (err) => {
         //请求出错，根据返回状态码判断出错原因
-        console.log(err);
         mpvue.hideLoading();
         if (err) {
-            return "请求失败";
+            mpvue.showToast({
+                title: '请求失败',
+                icon: 'none',
+                duration: 2000
+            });
+            return err;
         }
     }
 );

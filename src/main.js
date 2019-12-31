@@ -3,8 +3,11 @@ import MpvueRouterPatch from 'mpvue-router-patch'
 import App from './App'
 import store from './store'
 import fly from './utils/api'
+import Toast from '@vant/weapp/dist/toast/toast'
 
 Vue.use(MpvueRouterPatch);
+
+Vue.prototype.$toast = Toast;
 
 Vue.prototype.$fly = fly;
 

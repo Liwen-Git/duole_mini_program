@@ -29,6 +29,9 @@
         "van-grid-item": "vant-weapp/dist/grid-item/index",
         "van-panel": "vant-weapp/dist/panel/index",
         "van-cell": "vant-weapp/dist/cell/index",
-        "van-cell-group": "vant-weapp/dist/cell-group/index"
+        "van-cell-group": "vant-weapp/dist/cell-group/index",
+        "van-toast": "vant-weapp/dist/toast/index",
+        "van-field": "vant-weapp/dist/field/index",
+        "van-dialog": "vant-weapp/dist/dialog/index"
     }
 }
