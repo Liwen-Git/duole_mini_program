@@ -2,20 +2,19 @@
     <div>
         <van-panel title="互动空间" header-class="index-van-panel-header-class">
             <van-grid clickable column-num="2">
-                <van-grid-item icon="like-o" link-type="navigateTo" @click="showPass" text="FeVer物语" />
-                <van-grid-item icon="star-o" link-type="navigateTo" @click="showPass" text="李子语录" />
+                <van-grid-item icon="like-o" link-type="navigateTo" @click="showPass(1)" text="FeVer物语" />
+                <van-grid-item icon="star-o" link-type="navigateTo" @click="showPass(2)" text="李子语录" />
             </van-grid>
         </van-panel>
 
-        <van-dialog use-slot title="请输入密码" :show="show" show-cancel-button @confirm="checkPassword" @cancel="show = false" :asyncClose="true">
+        <van-dialog use-slot title="请输入密码" :show="show" show-cancel-button @confirm="checkPassword" @cancel="show = false">
             <van-field
                     :value="password"
                     left-icon="lock"
                     type="password"
                     placeholder="密码"
-                    :error-message="errMsg"
                     :border="false"
-                    @change="getErrMsg"
+                    @change="onChange"
             />
         </van-dialog>
 
@@ -35,7 +34,7 @@
                 },
                 password: '',
                 show: false,
-                errMsg: '',
+                type: '',
             }
         },
         methods: {
@@ -56,23 +55,33 @@
             bindGetUserInfo(e) {
                 console.log('e', e);
             },
-            showPass() {
-                this.errMsg = '';
+            showPass(type) {
                 this.password = '';
+                this.type = type;
                 this.show = true;
             },
-            getErrMsg(e) {
-                if (e.mp.detail === '') {
-                    this.errMsg = "密码不能为空";
-                } else {
-                    this.errMsg = "";
-                }
+            onChange(e) {
+                this.password = e.mp.detail;
             },
             checkPassword() {
-                if (this.password === '') {
-                    this.errMsg = "密码不能为空";
-                    return false;
+                let query = {};
+                if (this.type === 1) {
+                    query = {
+                        type: 1,
+                        title: 'FeVer物语',
+                    }
+                } else {
+                    query = {
+                        type: 2,
+                        title: '李子语录',
+                    }
                 }
+                this.$router.push({
+                    path: '/pages/story',
+                    query: query,
+                });
+                this.show = false;
+                return;
                 this.$fly.request({
                     method: "post",
                     url: '/api/mini/story/check',
@@ -81,7 +90,7 @@
                     }
                 }).then(res => {
                     if (res) {
-                        console.log(res);
+                        this.$router.push('/pages/story');
                     }
                     this.show = false;
                 })

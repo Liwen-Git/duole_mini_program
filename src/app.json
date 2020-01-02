@@ -7,6 +7,13 @@
             }
         },
         {
+            "path": "pages/story",
+            "config": {
+                "navigationBarTitleText": "日记",
+                "enablePullDownRefresh": true
+            }
+        },
+        {
             "path": "pages/logs",
             "config": {
                 "navigationBarTitleText": "日志",
