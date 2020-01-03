@@ -2,8 +2,8 @@
     <div>
         <van-panel title="互动空间" header-class="index-van-panel-header-class">
             <van-grid clickable column-num="2">
-                <van-grid-item icon="like-o" link-type="navigateTo" @click="showPass(1)" text="FeVer物语" />
-                <van-grid-item icon="star-o" link-type="navigateTo" @click="showPass(2)" text="李子语录" />
+                <van-grid-item icon="like-o" link-type="navigateTo" @click="showPass(2)" text="FeVer物语" />
+                <van-grid-item icon="star-o" link-type="navigateTo" @click="showPass(1)" text="李子语录" />
             </van-grid>
         </van-panel>
 
@@ -65,19 +65,19 @@
             },
             checkPassword() {
                 let query = {};
-                if (this.type === 1) {
+                if (this.type === 2) {
                     query = {
-                        type: 1,
+                        type: this.type,
                         title: 'FeVer物语',
                     }
                 } else {
                     query = {
-                        type: 2,
+                        type: this.type,
                         title: '李子语录',
                     }
                 }
                 this.$router.push({
-                    path: '/pages/story',
+                    path: '/pages/story/index',
                     query: query,
                 });
                 this.show = false;
@@ -90,7 +90,7 @@
                     }
                 }).then(res => {
                     if (res) {
-                        this.$router.push('/pages/story');
+                        this.$router.push('/pages/story/index');
                     }
                     this.show = false;
                 })

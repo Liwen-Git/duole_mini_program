@@ -15,7 +15,8 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"nodeModules": false
 	},
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
@@ -23,7 +24,7 @@
 	"projectname": "duole_mini_program",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
-	"libVersion": "2.9.4",
+	"libVersion": "2.10.0",
 	"condition": {
 		"search": {
 			"current": -1,

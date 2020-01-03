@@ -7,10 +7,15 @@
             }
         },
         {
-            "path": "pages/story",
+            "path": "pages/story/index",
             "config": {
-                "navigationBarTitleText": "日记",
                 "enablePullDownRefresh": true
+            }
+        },
+        {
+            "path": "pages/story/add",
+            "config": {
+                "navigationBarTitleText": "新日记"
             }
         },
         {
@@ -39,6 +44,10 @@
         "van-cell-group": "vant-weapp/dist/cell-group/index",
         "van-toast": "vant-weapp/dist/toast/index",
         "van-field": "vant-weapp/dist/field/index",
-        "van-dialog": "vant-weapp/dist/dialog/index"
+        "van-dialog": "vant-weapp/dist/dialog/index",
+        "van-datetime-picker": "vant-weapp/dist/datetime-picker/index",
+        "van-popup": "vant-weapp/dist/popup/index",
+        "van-swipe-cell": "vant-weapp/dist/swipe-cell/index",
+        "van-notice-bar": "vant-weapp/dist/notice-bar/index"
     }
 }
