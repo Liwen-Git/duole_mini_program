@@ -64,24 +64,6 @@
                 this.password = e.mp.detail;
             },
             checkPassword() {
-                let query = {};
-                if (this.type === 2) {
-                    query = {
-                        type: this.type,
-                        title: 'FeVer物语',
-                    }
-                } else {
-                    query = {
-                        type: this.type,
-                        title: '李子语录',
-                    }
-                }
-                this.$router.push({
-                    path: '/pages/story/index',
-                    query: query,
-                });
-                this.show = false;
-                return;
                 this.$fly.request({
                     method: "post",
                     url: '/api/mini/story/check',
@@ -90,7 +72,22 @@
                     }
                 }).then(res => {
                     if (res) {
-                        this.$router.push('/pages/story/index');
+                        let query = {};
+                        if (this.type === 2) {
+                            query = {
+                                type: this.type,
+                                title: 'FeVer物语',
+                            }
+                        } else {
+                            query = {
+                                type: this.type,
+                                title: '李子语录',
+                            }
+                        }
+                        this.$router.push({
+                            path: '/pages/story/index',
+                            query: query,
+                        });
                     }
                     this.show = false;
                 })
