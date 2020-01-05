@@ -68,10 +68,10 @@
                     return false;
                 }
                 this.confirmLoading = true;
-                this.formData.wx_user_id = this.$route.query.wx_user_id;
+                this.formData.id = this.$route.query.id;
                 this.$fly.request({
                     method: 'post',
-                    url: '/api/mini/story/add',
+                    url: '/api/mini/story/edit',
                     body: this.formData,
                 }).then(res => {
                     if (res) {
@@ -83,10 +83,10 @@
         },
         mounted() {
             this.formData = {
-                date: formatDate(new Date()),
-                content: '',
+                date: formatDate(new Date(this.$route.query.date)),
+                content: this.$route.query.content,
             };
-            this.pickerDate = new Date().getTime();
+            this.pickerDate = new Date(this.$route.query.date).getTime();
             this.showPopup = false;
             this.confirmLoading = false;
         }

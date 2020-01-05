@@ -19,6 +19,12 @@
             }
         },
         {
+            "path": "pages/story/edit",
+            "config": {
+                "navigationBarTitleText": "编辑日记"
+            }
+        },
+        {
             "path": "pages/logs",
             "config": {
                 "navigationBarTitleText": "日志",

@@ -8,7 +8,7 @@
         <van-row>
             <van-col span="24">
                 <div v-for="(val, key) in list" :key="key">
-                    <van-swipe-cell id="swipe-cell" :right-width="60" async-close @close="onClose">
+                    <van-swipe-cell id="swipe-cell" :right-width="60" async-close @close="editStory(val)">
                         <van-panel :title="val.date"></van-panel>
                         <van-button slot="right" type="primary">编辑</van-button>
                     </van-swipe-cell>
@@ -37,8 +37,15 @@
             }
         },
         methods: {
-            onClose() {
-
+            editStory(val) {
+                this.$router.push({
+                    path: '/pages/story/edit',
+                    query: {
+                        id: val.id,
+                        date: val.date,
+                        content: val.content,
+                    },
+                })
             },
             addStory() {
                 this.$router.push({
