@@ -82,7 +82,13 @@
             }
         },
         mounted() {
-            console.log(this.$route.query);
+            this.formData = {
+                date: formatDate(new Date()),
+                    content: '',
+            };
+            this.pickerDate = new Date().getTime();
+            this.showPopup = false;
+            this.confirmLoading = false;
         }
     }
 </script>

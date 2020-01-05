@@ -47,16 +47,21 @@
                 })
             },
             getList() {
+                this.list = [];
+                this.pageSize =  10;
+                this.page =  1;
+                this.total =  0;
+
                 this.$fly.request({
                     method: 'get',
                     url: '/api/mini/story/list',
                     body: {
+                        wx_user_id: this.wx_user_id,
                         page: this.page,
                         pageSize: this.pageSize,
                     }
                 }).then(res => {
                     if (res) {
-                        console.log('res', res);
                         this.list = res.list;
                         this.total = res.total;
                     }
@@ -64,17 +69,47 @@
             }
         },
         mounted() {
+
+        },
+        onLoad() {
             this.title = this.$route.query.title;
             this.wx_user_id = this.$route.query.type;
             mpvue.setNavigationBarTitle({
                 title: this.title
             });
+        },
+        // 生命周期函数--监听小程序显示(后退到这个页面的时候这个就会被回调) 当小程序启动，或从后台进入前台显示，会触发 onShow
+        onShow() {
             this.getList();
         },
-        onUnload() {
-            mpvue.reLaunch({
-                url: '/pages/index'
-            })
+        // 下拉刷新
+        onPullDownRefresh() {
+            mpvue.showNavigationBarLoading();
+            setTimeout(()=>{
+                this.getList();
+                mpvue.stopPullDownRefresh();
+                mpvue.hideNavigationBarLoading();
+            },3000)
+        },
+        // 上拉加载
+        onReachBottom() {
+            if (this.page * this.pageSize < this.total) {
+                this.page = this.page + 1;
+                this.$fly.request({
+                    method: 'get',
+                    url: '/api/mini/story/list',
+                    body: {
+                        wx_user_id: this.wx_user_id,
+                        page: this.page,
+                        pageSize: this.pageSize,
+                    }
+                }).then(res => {
+                    if (res) {
+                        this.list.push(...res.list);
+                    }
+                })
+            }
+
         }
     }
 </script>
