@@ -1,7 +1,7 @@
 import Fly from 'flyio/dist/npm/wx'
 
 const fly = new Fly();
-const host = process.env.NODE_ENV === 'production' ? '' : 'http://laravel-li.com';
+const host = process.env.NODE_ENV === 'production' ? 'https://zlf520.com.cn' : 'http://laravel-li.com';
 
 // 添加请求拦截器
 fly.interceptors.request.use((request) => {
