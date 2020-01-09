@@ -58,7 +58,24 @@
             showPass(type) {
                 this.password = '';
                 this.type = type;
-                this.show = true;
+                let query = {};
+                if (this.type === 2) {
+                    query = {
+                        type: this.type,
+                        title: 'FeVer物语',
+                    }
+                } else {
+                    query = {
+                        type: this.type,
+                        title: '李子语录',
+                    }
+                }
+                this.$router.push({
+                    path: '/pages/story/index',
+                    query: query,
+                });
+
+                // this.show = true;
             },
             onChange(e) {
                 this.password = e.mp.detail;
