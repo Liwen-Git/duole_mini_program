@@ -54,6 +54,7 @@
         "van-datetime-picker": "vant-weapp/dist/datetime-picker/index",
         "van-popup": "vant-weapp/dist/popup/index",
         "van-swipe-cell": "vant-weapp/dist/swipe-cell/index",
-        "van-notice-bar": "vant-weapp/dist/notice-bar/index"
+        "van-notice-bar": "vant-weapp/dist/notice-bar/index",
+        "van-uploader": "vant-weapp/dist/uploader/index"
     }
 }

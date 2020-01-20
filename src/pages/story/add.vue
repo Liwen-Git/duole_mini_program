@@ -12,6 +12,9 @@
                     :show-confirm-bar="false"
                     @change="getContent"
             />
+            <van-panel title="图片">
+                <image-upload v-model="formData.images"></image-upload>
+            </van-panel>
 
             <van-row>
                 <van-col offset="8" span="8">
@@ -47,6 +50,7 @@
                 formData: {
                     date: formatDate(new Date()),
                     content: '',
+                    images: '',
                 },
                 pickerDate: new Date().getTime(),
                 showPopup: false,
@@ -85,6 +89,7 @@
             this.formData = {
                 date: formatDate(new Date()),
                 content: '',
+                images: '',
             };
             this.pickerDate = new Date().getTime();
             this.showPopup = false;

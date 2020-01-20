@@ -13,6 +13,10 @@ Vue.prototype.$fly = fly;
 
 Vue.config.productionTip = false;
 
+
+import ImageUpload from './components/upload-images';
+Vue.component('ImageUpload', ImageUpload);
+
 const app = new Vue({
     mpType: 'app',
     store,
