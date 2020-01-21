@@ -1,9 +1,9 @@
 <template>
     <van-row>
         <van-col>
-                test
-            <van-uploader :file-list="fileList" @afterRead="afterRead"></van-uploader>
+            <van-uploader :file-list="fileList" @afterRead="afterRead" @delete="deleteImg" @oversize="overSize" :max-size="52428800"></van-uploader>
         </van-col>
+        <van-toast id="van-toast" />
     </van-row>
 </template>
 
@@ -20,21 +20,67 @@
         },
         methods: {
             afterRead(event) {
-                console.log(event);
-                this.$fly.request({
-                    method: 'post',
-                    headers: {
-                        'content-type': "multipart/form-data"
+                let _self = this;
+                let host = process.env.NODE_ENV === 'production' ? 'https://zlf520.com.cn' : 'http://laravel-li.com';
+                const { file } = event.mp.detail;
+                // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+                mpvue.uploadFile({
+                    url: host + '/api/mini/local/upload',
+                    filePath: file.path,
+                    name: 'file',
+                    formData: {
+                        directory: 'diary',
+                        type: 1
                     },
-                    url: '/api/mini/local/upload',
-                    body: {
-                        file: event.mp.detail.path
+                    success(res) {
+                        let data = JSON.parse(res.data);
+                        let url = data.data.url;
+                        _self.fileList.push({
+                            url: url
+                        });
+                        _self.emitInput();
                     },
-                }).then(res => {
-                    console.log('res', res);
+                    fail() {
+                        this.$toast.fail('图片上传失败');
+                    }
+                });
+            },
+            deleteImg(event) {
+                this.fileList.splice(event.mp.detail.index, 1);
+                this.emitInput();
+            },
+            emitInput(){
+                let value = [];
+                this.fileList.forEach(item => {
+                    value.push(item.url)
+                });
+                value = value.join(',');
+                this.$emit('input', value);
+            },
+            overSize() {
+                this.$toast.fail('图片不能超过50M');
+            },
+            initFileList(){
+                let value = [];
+                if(this.value){
+                    value = this.value.split(',')
+                }
+                this.fileList = [];
+                value.forEach(item => {
+                    this.fileList.push({
+                        url: item
+                    })
                 })
             }
-        }
+        },
+        created(){
+            this.initFileList()
+        },
+        watch: {
+            value (){
+                this.initFileList()
+            }
+        },
     }
 </script>
 

@@ -37,6 +37,7 @@
                 />
             </van-popup>
 
+            <van-toast id="van-toast" />
         </van-col>
     </van-row>
 </template>

@@ -12,6 +12,9 @@
                     :show-confirm-bar="false"
                     @change="getContent"
             />
+            <van-panel title="图片">
+                <image-upload v-model="formData.images"></image-upload>
+            </van-panel>
 
             <van-row>
                 <van-col offset="8" span="8">
@@ -34,6 +37,7 @@
                 />
             </van-popup>
 
+            <van-toast id="van-toast" />
         </van-col>
     </van-row>
 </template>
@@ -41,12 +45,13 @@
 <script>
     import {formatDate} from '../../utils/index'
     export default {
-        name: "story_add",
+        name: "story_edit",
         data() {
             return {
                 formData: {
                     date: formatDate(new Date()),
                     content: '',
+                    images: '',
                 },
                 pickerDate: new Date().getTime(),
                 showPopup: false,
@@ -82,11 +87,24 @@
             }
         },
         mounted() {
-            this.formData = {
-                date: formatDate(new Date(this.$route.query.date)),
-                content: this.$route.query.content,
-            };
-            this.pickerDate = new Date(this.$route.query.date).getTime();
+            let id = this.$route.query.id;
+            this.$fly.request({
+                method: 'get',
+                url: '/api/mini/story/one',
+                body: {
+                    id: id
+                }
+            }).then(res => {
+                if (res) {
+                    this.formData = {
+                        date: formatDate(new Date(res.date)),
+                        content: res.content,
+                        images: res.images,
+                    };
+                    this.pickerDate = new Date(res.date).getTime();
+                }
+            });
+
             this.showPopup = false;
             this.confirmLoading = false;
         }

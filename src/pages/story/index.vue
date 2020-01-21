@@ -42,8 +42,6 @@
                     path: '/pages/story/edit',
                     query: {
                         id: val.id,
-                        date: val.date,
-                        content: val.content,
                     },
                 })
             },
