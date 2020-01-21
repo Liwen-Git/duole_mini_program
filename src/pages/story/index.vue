@@ -17,6 +17,16 @@
                             scrollable="false"
                             :text="val.content"
                     />
+                    <van-image
+                            v-for="(item, index) in val.imagesArr"
+                            :key="index"
+                            v-if="item"
+                            width="5rem"
+                            height="5rem"
+                            fit="contain"
+                            :src="item"
+                            @click="previewImg(item, val.imagesArr)"
+                    />
                 </div>
             </van-col>
         </van-row>
@@ -67,9 +77,18 @@
                     }
                 }).then(res => {
                     if (res) {
+                        res.list.forEach(function(item) {
+                            item.imagesArr = item.images.split(',');
+                        });
                         this.list = res.list;
                         this.total = res.total;
                     }
+                })
+            },
+            previewImg(current, urls) {
+                mpvue.previewImage({
+                    current: current, // 当前显示图片的http链接
+                    urls: urls // 需要预览的图片http链接列表
                 })
             }
         },
@@ -110,6 +129,9 @@
                     }
                 }).then(res => {
                     if (res) {
+                        res.list.forEach(function(item) {
+                            item.imagesArr = item.images.split(',');
+                        });
                         this.list.push(...res.list);
                     }
                 })

@@ -1,7 +1,12 @@
 <template>
     <van-row>
         <van-col>
-            <van-uploader :file-list="fileList" @afterRead="afterRead" @delete="deleteImg" @oversize="overSize" :max-size="52428800"></van-uploader>
+            <van-uploader
+                    :file-list="fileList"
+                    @afterRead="afterRead"
+                    @delete="deleteImg"
+                    @oversize="overSize"
+                    :max-size="52428800"></van-uploader>
         </van-col>
         <van-toast id="van-toast" />
     </van-row>
