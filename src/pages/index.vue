@@ -6,6 +6,19 @@
                 <van-grid-item icon="star-o" link-type="navigateTo" @click="showPass(1)" text="李子语录" />
             </van-grid>
         </van-panel>
+        <van-panel title="更新日志" header-class="index-van-panel-header-class">
+            <div style="margin-left: 15px;font-size: 14px;">
+                <van-row>
+                    v1.0.3 新增图片添加
+                </van-row>
+                <van-row>
+                    v1.0.4 新增图片预览
+                </van-row>
+                <van-row>
+                    v1.0.5 新增更新日志以及上传图片bug修复
+                </van-row>
+            </div>
+        </van-panel>
 
         <van-dialog use-slot title="请输入密码" :show="show" show-cancel-button @confirm="checkPassword" @cancel="show = false">
             <van-field
