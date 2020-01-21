@@ -44,6 +44,7 @@
                 pageSize: 10,
                 page: 1,
                 total: 0,
+                onShowRefresh: false,
             }
         },
         methods: {
@@ -86,6 +87,7 @@
                 })
             },
             previewImg(current, urls) {
+                this.onShowRefresh = true;
                 mpvue.previewImage({
                     current: current, // 当前显示图片的http链接
                     urls: urls // 需要预览的图片http链接列表
@@ -104,7 +106,11 @@
         },
         // 生命周期函数--监听小程序显示(后退到这个页面的时候这个就会被回调) 当小程序启动，或从后台进入前台显示，会触发 onShow
         onShow() {
-            this.getList();
+            if (this.onShowRefresh) {
+                this.onShowRefresh = false;
+            } else {
+                this.getList();
+            }
         },
         // 下拉刷新
         onPullDownRefresh() {
